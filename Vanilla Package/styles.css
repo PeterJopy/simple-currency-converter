@@ -1,0 +1,264 @@
+
+/* Various styles to override the default padding and margin that comes with HTML by default */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Various styles for the darkmode functionality (var) to string to the "root" */
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #333;
+    --input-background: #ffffff;
+    --button-background: #007bff;
+    --button-text-color: white;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.converter {
+    background-color: var(--input-background);
+}
+
+.equals {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    --background-color: #1e1e1e;
+    --text-color: #ffffff;
+    --input-background: #1e1e1e;
+    --button-background: #007bff;
+    --button-text-color: white;
+}
+
+/* Hero */
+#hero {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center; 
+    align-items: center; 
+    height: 20vh; 
+    background-color: var(--background-color);
+    font-family: 'Inter', sans-serif;
+}
+
+#hero h1 {
+    font-size: 2.5rem; 
+    color: var(--text-color); 
+    margin: auto; 
+    text-align: center; 
+}
+
+/* Responsive text size */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    #hero h1 {
+        font-size: 1.5rem; 
+    }
+}
+
+.titlespan {
+    color: #007bff;
+}
+
+
+#subheading {
+    font-size: 1.2rem; 
+    margin-top: 1rem;  
+    text-align: center; 
+    color: var(--text-color); 
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 30px;
+}
+
+body.dark-mode .hero-title,
+body.dark-mode #subheading {
+    color: var(--text-color); 
+}
+
+
+
+
+
+/* Currency converter styling */
+.converter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    font-family: 'Inter', sans-serif;
+    padding-top: 160px;
+    padding-bottom: 300px;
+}
+
+/* Currency input styling */
+.currency-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 40px; 
+}
+
+.currency-input input {
+    width: 400px;
+    height: 160px;
+    padding: 10px;
+    font-size: 5rem;
+    margin: 10px 0;
+    text-align: center; 
+}
+
+/* styling for the equals sign in the center */
+.equals {
+    font-size: 3rem;
+    margin: 0 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px; 
+    height: 60px; 
+    border-radius: 10px;
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+}
+
+/* Select dropdown styling */
+.currency-input select {
+    width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    margin: 10px 0;
+    text-align: left; 
+    text-align-last: left; 
+}
+
+/* Responsive stuff */
+@media (max-width: 768px) {
+    .converter {
+        flex-direction: column; 
+        padding-bottom: 50px; 
+        margin-top: 20px; 
+        padding-top: 60px;
+    }
+
+    .currency-input {
+        margin: 0; 
+        width: 100%; 
+    }
+
+    .currency-input input {
+        width: 90%; 
+        font-size: 2rem; 
+    }
+
+    .currency-input select {
+        width: 90%; 
+        font-size: 1rem; 
+    }
+
+    .equals {
+        margin: 20px 0; 
+        transform: rotate(90deg); 
+    }
+}
+
+@media (max-width: 480px) {
+    .currency-input input {
+        font-size: 1.5rem; 
+    }
+
+    .currency-input select {
+        font-size: 0.9rem; 
+    }
+
+    .equals {
+        font-size: 2.5rem; 
+        width: 60px; 
+        height: 60px; 
+    }
+}
+
+
+/* Countries title styling */
+.countries-title {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 1.5rem 0; 
+    font-family: 'Inter', sans-serif; 
+}
+
+.countries-title h2 {
+    font-size: 2rem; 
+    font-weight: bold; 
+    color: var(--text-color); 
+    text-align: center; 
+}
+
+/* Carousel container styling */
+.carousel-container {
+    width: 100%;
+    height: 200px; 
+    overflow: hidden; 
+    margin-top: 3rem;
+    background-color: var(--background-color); 
+}
+
+/* Carousel inner container styling */
+.carousel {
+    display: flex; 
+    align-items: center; 
+    width: calc(200% + 40px); 
+    animation: scroll 20s linear infinite; 
+}
+
+/* Carousel image styling */
+.carousel img {
+    height: 200px; 
+    margin: 0 20px; 
+}
+
+/* scrolling animation */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-30%); 
+    }
+}
+
+/* lightmode darkmode button styling */
+.theme-toggle {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.5rem; 
+    color: var(--text-color); 
+    transition: color 0.3s ease; 
+}
+
+.theme-toggle:hover {
+    color: var(--button-background); 
+}
