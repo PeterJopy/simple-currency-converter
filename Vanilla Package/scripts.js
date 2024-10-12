@@ -8,6 +8,9 @@ async function fetchCurrencies() {
         const currencySelect1 = document.getElementById('currency1');  // These are references to the dropdown elements for currency selection
         const currencySelect2 = document.getElementById('currency2');
   
+
+
+
         // This populates both dropdowns with currency options
         currencies.forEach(currency => {
             const option1 = document.createElement('option');    // This ensures it shows an "option element" for the first dropdown as the currency ID
@@ -26,6 +29,8 @@ async function fetchCurrencies() {
     }
 }
 
+
+
 // This will "fetch" the exchange rate from the Coinbase API for the conversion part
 async function fetchExchangeRate(baseCurrency, targetCurrency) {
     try {
@@ -38,6 +43,7 @@ async function fetchExchangeRate(baseCurrency, targetCurrency) {
         return null;
     }
 }
+
 
 // This section is the conversion portion
 async function convertCurrency() { // "Get" the amount entered by the user from the input field, refresh in a way
@@ -60,6 +66,7 @@ async function convertCurrency() { // "Get" the amount entered by the user from 
     }
 }
 
+
 // This is for the initial load
 fetchCurrencies();
 
@@ -67,6 +74,13 @@ fetchCurrencies();
 document.getElementById('currency1').addEventListener('change', convertCurrency);
 document.getElementById('currency2').addEventListener('change', convertCurrency);
 document.getElementById('amount1').addEventListener('input', convertCurrency);
+
+
+
+
+
+
+
 
 
 // Lightmode and darkmode
@@ -79,11 +93,81 @@ function toggleTheme() {
 
     // This updates the icon based on the current mode
     if (document.body.classList.contains('dark-mode')) {
-        themeIcon.textContent = '🌙'; // Moon icon for dark mode
+        themeIcon.textContent = '🌙'; 
     } else {
-        themeIcon.textContent = '🌞'; // Sun icon for light mode
+        themeIcon.textContent = '🌞'; 
     }
 }
 
 // Event listener only for the toggle button
 themeToggle.addEventListener('click', toggleTheme);
+
+// "Theme persistence"
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    themeIcon.textContent = isDarkMode ? '🌙' : '🌞';
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+// On load, check if the theme is stored
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIcon.textContent = '🌙';
+}
+
+
+// Carousel Reverse
+let carousel = document.querySelector('.carousel');
+let reverse = false;
+
+function animateCarousel() {
+  if (reverse) {
+    carousel.style.transform = `translateX(-5%)`; // Reverse animation
+  } else {
+    carousel.style.transform = `translateX(0%)`; // Forward animation
+  }
+}
+
+//Duplicate Script from above with minor alterations to trigger "AUD" and "USD" default selection currencies
+
+async function fetchCurrencies() {
+    try {
+        const response = await fetch('https://api.coinbase.com/v2/currencies');
+        const data = await response.json();
+        const currencies = data.data;
+
+        const currencySelect1 = document.getElementById('currency1');
+        const currencySelect2 = document.getElementById('currency2');
+
+        currencies.forEach(currency => {
+            const option = document.createElement('option');
+            option.value = currency.id; 
+            option.text = `${currency.id} - ${currency.name}`; 
+            currencySelect1.appendChild(option); 
+            currencySelect2.appendChild(option.cloneNode(true)); 
+        });
+
+        // Log the available currency IDs
+        console.log("Available Currencies:", currencies.map(c => c.id));
+
+        // Set default selections
+        currencySelect1.value = 'AUD'; // first dropdown to AUD
+        currencySelect2.value = 'USD'; // second dropdown to USD
+
+        // Check if default values exist
+        const defaultCurrency1Exists = currencySelect1.querySelector('option[value="AUD"]');
+        const defaultCurrency2Exists = currencySelect2.querySelector('option[value="USD"]');
+
+        if (!defaultCurrency1Exists) {
+            console.error('AUD not found in currency options');
+        }
+        if (!defaultCurrency2Exists) {
+            console.error('USD not found in currency options');
+        }
+
+    } catch (error) {
+        console.error('Error fetching currencies:', error);
+    }
+}

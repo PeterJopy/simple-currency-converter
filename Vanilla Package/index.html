@@ -16,22 +16,35 @@
 </head>
 <body>
     <section id="hero">
-        <h1>Simple, Lightweight <span class="titlespan">Currency Converter</span>. Free Forever.</h1>
+        <h1>Simple <span class="titlespan">Currency Converter</span>. Free Forever.</h1>
 
-        <h2 id="subheading">🌍 Powered by Coinbase Market Currencies API v2.</h2>
+        <!-- <h2 id="subheading">🌍 Powered by Coinbase Market Currencies API v2.</h2> -->
 
     </section>
 
 
 
     <div class="converter">
+
+
+
+
         <div class="currency-input">
-            
+
+            <div class="flashing-text">
+                Insert your currency here 
+                <span class="down-arrow">↓</span>
+              </div>
+
             <input type="number" id="amount1" placeholder="0" />
             <select id="currency1"></select>
         </div>
         <span class="equals">=</span>
         <div class="currency-input">
+            <div class="flashing-text2">
+                Converted Currency Price
+                <span class="down-arrow2">↓</span>
+              </div>
             <input type="number" id="amount2" placeholder="0.00" disabled />
             <select id="currency2"></select>
         </div>
@@ -60,7 +73,6 @@
 
 
 
-
     <script>
 
         const themeToggle = document.getElementById('theme-toggle');
@@ -78,5 +90,10 @@
 
         themeToggle.addEventListener('click', toggleTheme);
     </script>
+
+<div class="footer">
+    <h2 id="subheading">🌍 Powered by Coinbase Market Currencies API v2.</h2>
+</div>
+
 </body>
 </html>
